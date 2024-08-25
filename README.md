@@ -1,0 +1,1 @@
+# Business Intelligence Project for the course of Business Intelligence and Analytics
