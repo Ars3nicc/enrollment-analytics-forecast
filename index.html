@@ -25,23 +25,28 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         transition: transform 0.3s, box-shadow 0.3s;
     }
+
     .card-hover-1:hover {
         background-color: rgba(255, 99, 132, 0.2);
         /* Light red */
     }
+
     .card-hover-2:hover {
         background-color: rgba(54, 162, 235, 0.2);
         /* Light blue */
     }
+
     .card-hover-3:hover {
         background-color: rgba(75, 192, 192, 0.2);
         /* Light green */
     }
-    .total_number{
+
+    .total_number {
         color: #3b3b3b;
         font-size: 2rem;
         font-weight: bold;
     }
+
     .card-hover-1:hover .card-text,
     .card-hover-2:hover .card-text,
     .card-hover-3:hover .card-text {
@@ -63,7 +68,7 @@
                 </header>
                 <div class="p-3 sm:block md:flex justify-center items-center gap-2">
                     <!-- <img class="w-20 h-20 object-contain" src="deped seal.webp" alt="deped seal" srcset=""> -->
-                    <h1 class="pl-4 text-5xl font-bold text-gray-700 ">DepEd Enrollment Analytics</h1>
+                    <h1 class="pl-4 text-5xl font-bold text-gray-700 uppercase">Enrollment Dashboard</h1>
                 </div>
                 <nav class="p-4 rounded-lg">
                     <div class="flex space-x-4 text-white justify-center gap-4">
@@ -77,45 +82,15 @@
                             class="bg-sky-500 text-center p-2 w-28 rounded-full hover:bg-sky-700 hover:text-gray-200 transition duration-300">Settings</a>
                     </div>
                 </nav>
-                <!-- Cards -->
-                <section class="row">
-                    <h1 class="p-4 text-2xl font-semibold">Accumulations</h1>
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class="card shadow-sm border-0">
-                            <div class="card-body">
-                                <h5 class="card-title text-gray-700">Total Students</h5>
-                                <p class="card-text total_number">100,000</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class="card shadow-sm border-0">
-                            <div class="card-body">
-                                <h5 class="card-title text-gray-700">Elementary School</h5>
-                                <p class="card-text total_number">120</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class="card shadow-sm border-0">
-                            <div class="card-body">
-                                <h5 class="card-title text-gray-700">Junior High School</h5>
-                                <p class="card-text total_number">$12,000</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class="card shadow-sm border-0">
-                            <div class="card-body">
-                                <h5 class="card-title text-gray-700">Senior High School</h5>
-                                <p class="card-text total_number">3,200</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+
                 <!-- Charts Row -->
                 <section class="row text-gray-700">
-                    <header class="p-4 text-center text-4xl">Summary of <b>Top 10 Regions</b> with Most Enrolled Students</header>
+                    <header class="p-4 text-center ">
+                        <h1 class="text-4xl">Summary of <b>Top 10 Regions</b> with Most Enrolled
+                            Students</h1>
+                        <p class="text-xl italic pt-3">from <b class="text-primary">Pre-Pandemic</b> (before) to <b
+                                class="text-primary">Peri-Pandemic</b> (during)</p>
+                    </header>
                     <div class="col-lg-6 mb-4">
                         <div class="card shadow-sm border-0">
                             <div class="card-body">
@@ -139,33 +114,104 @@
                         </div>
                     </div>
                 </section>
-                <section class="row">
-                    <div class="col-lg-4 mb-4">
-                        <div class="card shadow-sm border-0 card-hover-1">
-                            <div class="card-body">
-                                <h5 class="card-title text-2xl text-gray-700 text-center">2018-2019</h5>
-                                <p class="card-text text-center">8,320,627 Total of Enrollees</p>
+                <section class="flex justify-center flex-col md:flex-row lg:flex-row gap-32">
+                    <section>
+                        <h1 class="text-center md:text-left md:pb-5 text-5xl font-semibold">Enrollee Accumulations</h1>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="card-body w-full shadow-md bg-white p-5">
+                                <h5 class="card-title text-gray-700 text-center">Elementary School</h5>
+                                <p class="card-text total_number text-center">26,088,157</p>
+                            </div>
+                            <div class="card-body w-full shadow-md bg-white p-5">
+                                <h5 class="card-title text-gray-700 text-center">Junior High School</h5>
+                                <p class="card-text total_number text-center">26,847,704</p>
+                            </div>
+                            <div class="card-body w-full shadow-md bg-white p-5">
+                                <h5 class="card-title text-gray-700 text-center">Senior High School</h5>
+                                <p class="card-text total_number text-center">26,877,699</p>
+                            </div>
+
+                        </div>
+                    </section>
+                    <section class="grid grid-cols-1 md:gap-4 w-full md:w-2/6 ">
+                        <div class="mb-4">
+                            <div class="card shadow-sm border-0 card-hover-1">
+                                <div class="card-body">
+                                    <h5 class="card-title text-2xl text-gray-700 text-center">2018-2019</h5>
+                                    <p class="card-text text-center">26,847,704 Total of Enrollees</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 mb-4">
-                        <div class="card shadow-sm border-0 card-hover-2">
-                            <div class="card-body">
-                                <h5 class="card-title text-2xl text-gray-700 text-center">2019-2020</h5>
-                                <p class="card-text text-center">8,503,650 Total of Enrollees</p>
+                        <div class="mb-4">
+                            <div class="card shadow-sm border-0 card-hover-2">
+                                <div class="card-body">
+                                    <h5 class="card-title text-2xl text-gray-700 text-center">2019-2020</h5>
+                                    <p class="card-text text-center">26,877,699 Total of Enrollees</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 mb-4">
-                        <div class="card shadow-sm border-0 card-hover-3">
-                            <div class="card-body">
-                                <h5 class="card-title text-2xl text-gray-700 text-center">2020-2021</h5>
-                                <p class="card-text text-center">8,339,391 Total of Enrollees</p>
+                        <div class="mb-4">
+                            <div class="card shadow-sm border-0 card-hover-3">
+                                <div class="card-body">
+                                    <h5 class="card-title text-2xl text-gray-700 text-center">2020-2021</h5>
+                                    <p class="card-text text-center">26,088,157 Total of Enrollees</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
                 </section>
+
             </div>
+            <section class="flex flex-col justify-center items-center md:flex-row lg:flex-row gap-7">
+                <header>
+                    <h1
+                        class="text-center uppercase text-bold text-sky-600 pt-5 font-semibold text-4xl md:w-96 md:text-5xl">
+                        Timeline-Sequence Visualization</h1>
+                </header>
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title text-2xl text-gray-700 text-center">Pie Chart Distribution</h5>
+                        <!-- Checkboxes -->
+                        <div class="flex justify-center space-x-4 mb-4">
+                            <label>
+                                <input type="radio" name="year_pie" value="overall" checked
+                                    onclick="updateChart('overall')">
+                                Overall
+                            </label>
+                            <label>
+                                <input type="radio" name="year_pie" value="2018-2019"
+                                    onclick="updateChart('2018-2019')">
+                                2018-2019
+                            </label>
+                            <label>
+                                <input type="radio" name="year_pie" value="2019-2020"
+                                    onclick="updateChart('2019-2020')">
+                                2019-2020
+                            </label>
+                            <label>
+                                <input type="radio" name="year_pie" value="2020-2021"
+                                    onclick="updateChart('2020-2021')">
+                                2020-2021
+                            </label>
+                        </div>
+                        <!-- Pie chart canvas -->
+                        <div class="flex justify-center">
+                            <canvas id="pie-chart-schools" class="w-96 h-96"></canvas>
+                        </div>
+                        <script src="js/private_vs_public_pie.js"></script>
+                    </div>
+                </div>
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <h2 class="text-2xl font-bold text-center mb-5">Timeline Distribution</h2>
+                        <div class="flex justify-center">
+                            <canvas id="timelineChart" class="w-full h-96"></canvas>
+                        </div>
+                        <script src="js/enrollment_timeline_2018-2019.js"></script>
+                    </div>
+                </div>
+            </section>
+
             <!-- Data Analytics Table -->
             <section class="container">
                 <h2 class="mb-4 text-gray-800">Data Analytics</h2>
