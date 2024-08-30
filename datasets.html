@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrollment Forecast</title>
+    <!-- Favicon -->
+    <link rel="icon" href="pup.png" type="image/x-icon">
+    <!-- AOS -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <!-- CSV Parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+</head>
+
+<body class="bg-gray-100">
+    <div class="d-flex">
+        <!-- Main Content -->
+        <main class="flex-grow-1 p-4">
+            <div class="container-fluid">
+                <header class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="text-gray-800 text-xl">Dashboard</h1>
+                </header>
+                <div class="p-3 sm:block md:flex justify-center items-center gap-2">
+                    <!-- <img class="w-20 h-20 object-contain" src="deped seal.webp" alt="deped seal" srcset=""> -->
+                    <h1 class="pl-4 text-center text-5xl font-bold text-gray-700 uppercase">Datasets & Reports</h1>
+                </div>
+                <nav class="p-4 rounded-lg">
+                    <div class="flex space-x-4 text-white justify-center gap-4">
+                        <a href="index.html"
+                            class="bg-sky-500 text-center p-2 w-32 rounded-full hover:bg-sky-700 hover:text-gray-200 transition duration-300">Home</a>
+                        <a href="forecast.html"
+                            class="bg-sky-500 text-center p-2 w-32 rounded-full hover:bg-sky-700 hover:text-gray-200 transition duration-300">Forecast</a>
+                        <a href="datasets.html"
+                            class="bg-sky-500 text-center p-2 w-32 rounded-full hover:bg-sky-700 hover:text-gray-200 transition duration-300">Datasets</a>
+                    </div>
+                </nav>
+            </div>
+            <section class="p-4">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="card">
+                                <div class="card-header bg-sky-500 text-white">
+                                    <h2 class="card-title text-xl">Number of Enrollees per Year Level (2018-2021)</h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>School Year</th>
+                                                    <th>Elementary</th>
+                                                    <th>Junior High School</th>
+                                                    <th>Senior High School</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>2018-2019</td>
+                                                    <td>15,655,050</td>
+                                                    <td>8,262,066</td>
+                                                    <td>2,939,588</td>
+                                                    <td>26,856,704</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2019-2020</td>
+                                                    <td>15,309,037</td>
+                                                    <td>8,443,862</td>
+                                                    <td>3,124,700</td>
+                                                    <td>26,877,599</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2020-2021</td>
+                                                    <td>14,628,816</td>
+                                                    <td>8,282,454</td>
+                                                    <td>3,176,887</td>
+                                                    <td>26,088,157</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Grand Total</td>
+                                                    <td>45,592,903</td>
+                                                    <td>24,988,382</td>
+                                                    <td>9,241,175</td>
+                                                    <td>79,822,460</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="excel/datasets/year-level-report.xlsx" download
+                                        class="btn btn-primary">Download as Excel</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card">
+                                <div class="card-header bg-sky-500 text-white">
+                                    <h2 class="card-title text-xl">Number of Enrollees per Academic Strand (2018-2021)
+                                    </h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>School Year</th>
+                                                    <th>ABM</th>
+                                                    <th>HUMSS</th>
+                                                    <th>STEM</th>
+                                                    <th>GAS</th>
+                                                    <th>TVL</th>
+                                                    <th>Sports</th>
+                                                    <th>Arts and Design</th>
+                                                    <th>Others</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>2018-2019</td>
+                                                    <td>402,142</td>
+                                                    <td>12,632</td>
+                                                    <td>572,224</td>
+                                                    <td>459,572</td>
+                                                    <td>13,640</td>
+                                                    <td>4,916</td>
+                                                    <td>411,525</td>
+                                                    <td>1,062,937</td>
+                                                    <td>23,917,116</td>
+                                                    <td>26,856,704</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2019-2020</td>
+                                                    <td>400,587</td>
+                                                    <td>13,885</td>
+                                                    <td>530,296</td>
+                                                    <td>626,013</td>
+                                                    <td>12,851</td>
+                                                    <td>5,315</td>
+                                                    <td>468,011</td>
+                                                    <td>1,067,742</td>
+                                                    <td>23,752,899</td>
+                                                    <td>26,877,599</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2020-2021</td>
+                                                    <td>375,299</td>
+                                                    <td>12,118</td>
+                                                    <td>535,218</td>
+                                                    <td>756,741</td>
+                                                    <td>7,699</td>
+                                                    <td>4,867</td>
+                                                    <td>500,460</td>
+                                                    <td>984,485</td>
+                                                    <td>22,911,270</td>
+                                                    <td>26,088,157</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Grand Total</td>
+                                                    <td>1,178,028</td>
+                                                    <td>38,635</td>
+                                                    <td>1,637,738</td>
+                                                    <td>1,842,326</td>
+                                                    <td>34,190</td>
+                                                    <td>15,098</td>
+                                                    <td>1,379,996</td>
+                                                    <td>3,115,164</td>
+                                                    <td>70,581,285</td>
+                                                    <td>79,822,460</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="excel/datasets/academic-strand-report.xlsx" download
+                                        class="btn btn-primary">Download as Excel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="p-4">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- First Table for 2018-2019 -->
+                        <div class="col-md-6 mb-4">
+                            <div class="card">
+                                <div class="card-header bg-sky-500 text-white">
+                                    <h2 class="card-title">Number of Enrollees by Region (2018-2019)</h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Region</th>
+                                                    <th>Total Number of Students Enrolled</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Region I - Ilocos Region</td>
+                                                    <td>416,746</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region II - Cagayan Valley</td>
+                                                    <td>269,347</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region III - Central Luzon</td>
+                                                    <td>892,253</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region IV-A - CALABARZON</td>
+                                                    <td>1,177,847</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region IV-B - MIMAROPA</td>
+                                                    <td>272,820</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region V - Bicol Region</td>
+                                                    <td>582,521</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region VI - Western Visayas</td>
+                                                    <td>659,757</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region VII - Central Visayas</td>
+                                                    <td>665,751</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region VIII - Eastern Visayas</td>
+                                                    <td>405,521</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region IX - Zamboanga Peninsula</td>
+                                                    <td>319,702</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region X - Northern Mindanao</td>
+                                                    <td>382,891</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region XI - Davao Region</td>
+                                                    <td>416,696</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region XII - Soccsksargen</td>
+                                                    <td>374,613</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>CARAGA - CARAGA</td>
+                                                    <td>236,746</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>BARMM - Bangsamoro Autonomous Region in Muslim Mindanao</td>
+                                                    <td>195,357</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>CAR - Cordillera Administrative Region</td>
+                                                    <td>138,788</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>NCR - National Capital Region</td>
+                                                    <td>908,939</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Second Table for 2019-2020 -->
+                        <div class="col-md-6 mb-4">
+                            <div class="card">
+                                <div class="card-header bg-sky-500 text-white">
+                                    <h2 class="card-title">Number of Enrollees by Region (2019-2020)</h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Region</th>
+                                                    <th>Total Number of Students Enrolled</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Region I - Ilocos Region</td>
+                                                    <td>423,263</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region II - Cagayan Valley</td>
+                                                    <td>277,047</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region III - Central Luzon</td>
+                                                    <td>915,136</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region IV-A - CALABARZON</td>
+                                                    <td>1,213,489</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region IV-B - MIMAROPA</td>
+                                                    <td>276,621</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region V - Bicol Region</td>
+                                                    <td>583,824</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region VI - Western Visayas</td>
+                                                    <td>673,826</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region VII - Central Visayas</td>
+                                                    <td>671,703</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region VIII - Eastern Visayas</td>
+                                                    <td>407,076</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region IX - Zamboanga Peninsula</td>
+                                                    <td>327,650</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region X - Northern Mindanao</td>
+                                                    <td>397,967</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region XI - Davao Region</td>
+                                                    <td>431,313</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region XII - Soccsksargen</td>
+                                                    <td>390,292</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>CARAGA - CARAGA</td>
+                                                    <td>241,721</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>BARMM - Bangsamoro Autonomous Region in Muslim Mindanao</td>
+                                                    <td>210,953</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>CAR - Cordillera Administrative Region</td>
+                                                    <td>139,549</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>NCR - National Capital Region</td>
+                                                    <td>915,539</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Third Table for 2020-2021 -->
+                    <div class="row">
+                        <div class="col-md-12 mb-4">
+                            <div class="card">
+                                <div class="card-header bg-sky-500 text-white">
+                                    <h2 class="card-title">Number of Enrollees by Region (2020-2021)</h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Region</th>
+                                                    <th>Total Number of Students Enrolled</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Region I - Ilocos Region</td>
+                                                    <td>424,637</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region II - Cagayan Valley</td>
+                                                    <td>289,853</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region III - Central Luzon</td>
+                                                    <td>902,369</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region IV-A - CALABARZON</td>
+                                                    <td>1,178,212</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region IV-B - MIMAROPA</td>
+                                                    <td>273,497</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region V - Bicol Region</td>
+                                                    <td>528,491</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region VI - Western Visayas</td>
+                                                    <td>690,133</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region VII - Central Visayas</td>
+                                                    <td>645,722</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region VIII - Eastern Visayas</td>
+                                                    <td>410,451</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region IX - Zamboanga Peninsula</td>
+                                                    <td>333,646</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region X - Northern Mindanao</td>
+                                                    <td>399,801</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region XI - Davao Region</td>
+                                                    <td>411,314</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Region XII - Soccsksargen</td>
+                                                    <td>394,474</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>CARAGA - CARAGA</td>
+                                                    <td>245,678</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>BARMM - Bangsamoro Autonomous Region in Muslim Mindanao</td>
+                                                    <td>208,348</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>CAR - Cordillera Administrative Region</td>
+                                                    <td>138,604</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>NCR - National Capital Region</td>
+                                                    <td>858,003</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <a href="excel/datasets/Public-and-Private-Per-Region.CSV" download class="btn btn-primary">Download as
+                        CSV File</a>
+                </div>
+            </section>
+
+
+        </main>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-statistics@7.7.0/dist/simple-statistics.min.js"></script>
+
+</body>
+
+</html>
