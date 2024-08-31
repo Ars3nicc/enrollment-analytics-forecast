@@ -5,17 +5,32 @@ document.addEventListener("DOMContentLoaded", function () {
     { year: 2020, enrollees: 26088157, nonEnrollees: 530000 },
   ];
 
-  const totalEnrollees = historicalData.reduce(
-    (sum, data) => sum + data.enrollees,
-    0
-  );
-  const totalNonEnrollees = historicalData.reduce(
-    (sum, data) => sum + data.nonEnrollees,
-    0
-  );
+  // Calculate the means of x (year) and y (enrollees)
+  const meanX = historicalData.reduce((sum, data) => sum + data.year, 0) / historicalData.length;
+  const meanY = historicalData.reduce((sum, data) => sum + data.enrollees, 0) / historicalData.length;
 
-  const averageEnrollees = totalEnrollees / historicalData.length;
-  const averageNonEnrollees = totalNonEnrollees / historicalData.length;
+  // Calculate the slope (m) and intercept (b) for the line y = mx + b
+  let numerator = 0;
+  let denominator = 0;
+  historicalData.forEach(data => {
+    numerator += (data.year - meanX) * (data.enrollees - meanY);
+    denominator += (data.year - meanX) ** 2;
+  });
+  const m = numerator / denominator;
+  const b = meanY - m * meanX;
+
+  // Predict the enrollees for the year 2025
+  const year2025 = 2025;
+  const predictedEnrollees2025 = m * year2025 + b;
+
+  // Add the prediction to the data
+  const combinedData = historicalData.concat({ year: year2025, enrollees: predictedEnrollees2025, nonEnrollees: 550000 });
+
+  const totalEnrollees = combinedData.reduce((sum, data) => sum + data.enrollees, 0);
+  const totalNonEnrollees = combinedData.reduce((sum, data) => sum + data.nonEnrollees, 0);
+
+  const averageEnrollees = totalEnrollees / combinedData.length;
+  const averageNonEnrollees = totalNonEnrollees / combinedData.length;
 
   const ctx = document.getElementById("forecastDonutChart").getContext("2d");
   new Chart(ctx, {
@@ -44,15 +59,10 @@ document.addEventListener("DOMContentLoaded", function () {
         tooltip: {
           callbacks: {
             label: function (tooltipItem) {
-              const total = tooltipItem.dataset.data.reduce(
-                (sum, value) => sum + value,
-                0
-              );
+              const total = tooltipItem.dataset.data.reduce((sum, value) => sum + value, 0);
               const value = tooltipItem.raw;
               const percentage = ((value / total) * 100).toFixed(2);
-              return `${
-                tooltipItem.label
-              }: ${percentage}% (${value.toLocaleString()})`;
+              return `${tooltipItem.label}: ${percentage}% (${value.toLocaleString()})`;
             },
           },
         },
